@@ -87,12 +87,15 @@ namespace IHKDocScanner
                 }
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
+            String message = "Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung:"
             if (bold)
-                Console.WriteLine("Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung: Fett");
+                String message = message + " fett";
             if (italic)
-                Console.WriteLine("Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung: Kursiv");
+                message = message + " kursiv";
             if (underline)
-                Console.WriteLine("Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung: Unterstrichen");
+                message = message + unterstrichen;
+            if(bold || italic || underrline)
+                Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }

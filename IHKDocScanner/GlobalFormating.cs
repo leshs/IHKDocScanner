@@ -16,7 +16,7 @@ namespace IHKDocScanner
         private HeaderFooter FooterEven;
         private HeaderFooter FooterFirst;
         private HeaderFooter FooterPrimary;
-        //
+       
         public GlobalFormating(Document document)
         {
             Rng = document.Range();
@@ -124,19 +124,12 @@ namespace IHKDocScanner
         }
         */
 
-            //Die Methode prüft, ob Fußzeilen existieren
+        //Die Methode prüft, ob Fußzeilen existieren. Die erste Seite wird dabei ignoriert.
         public bool CheckFooter()
         {
             /*
-            Sections sections = Document.Sections;
-            HeadersFooters footers2 = Document.Sections.First.Footers; 
-            Section section = sections[1];
-          
-            HeadersFooters footers = section.Footers;
-            HeaderFooter footerEven = Footers[WdHeaderFooterIndex.wdHeaderFooterEvenPages];
-            HeaderFooter footerFirst = Footers[WdHeaderFooterIndex.wdHeaderFooterFirstPage];
-            HeaderFooter footerPrimary = Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
-*/
+            Unterscheidung nach Footer-Art
+            */
 
 
             if (!FooterEven.Exists && !FooterFirst.Exists && !FooterPrimary.Exists)
@@ -150,8 +143,12 @@ namespace IHKDocScanner
             return true;
         }
         
+        //Überprüft, ob dynamische Seitennummern vorhanden sind
         public void CheckPageNumbers()
         {
+            /*
+             * Differenzierung zwischen unterschiedlichen Footern einfügen
+             */
             int pageNumbersEven = FooterEven.PageNumbers.Count;
             int pageNumbersFirst = FooterFirst.PageNumbers.Count;
             int pageNumbersPrimary = FooterPrimary.PageNumbers.Count;
