@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.572
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IHKDocScanner", "IHKDocScanner\IHKDocScanner.csproj", "{9478A333-2134-4096-A3CA-CB7C7A9FC1FB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9478A333-2134-4096-A3CA-CB7C7A9FC1FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9478A333-2134-4096-A3CA-CB7C7A9FC1FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9478A333-2134-4096-A3CA-CB7C7A9FC1FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9478A333-2134-4096-A3CA-CB7C7A9FC1FB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD739BD8-3EFE-4A81-A295-DDA8738AC03F}
+	EndGlobalSection
+EndGlobal
