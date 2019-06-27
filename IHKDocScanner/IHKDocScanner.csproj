@@ -52,7 +52,7 @@
     <Compile Include="GlobalFormating.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StyleCheck.cs" />
+    <Compile Include="ParagraphFormatting.cs" />
     <Compile Include="TextFormatting.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -13,11 +13,18 @@ namespace IHKDocScanner
         private Range Rng;
         private PageSetup PSetup;
         private Document Document;
+        private HeaderFooter FooterEven;
+        private HeaderFooter FooterFirst;
+        private HeaderFooter FooterPrimary;
+        //
         public GlobalFormating(Document document)
         {
             Rng = document.Range();
             PSetup = Rng.PageSetup;
             Document = document;
+            FooterEven = Document.Sections.First.Footers[WdHeaderFooterIndex.wdHeaderFooterEvenPages];
+            FooterFirst = Document.Sections.First.Footers[WdHeaderFooterIndex.wdHeaderFooterFirstPage];
+            FooterPrimary = Document.Sections.First.Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
         }
 
         //Seitenanzahl überüfen
@@ -27,8 +34,8 @@ namespace IHKDocScanner
             if (numberOfPages > 15)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Fehler: Das Dokument darf höchstens 15 Seiten lang sein. Die Seitenzahl beträgt " + numberOfPages);
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Fehler: Das Dokument darf höchstens 15 Seiten lang sein. Die Seitenzahl beträgt " + numberOfPages +".");
+                Console.ForegroundColor = ConsoleColor.Gray;
             } else
             {
                 Console.WriteLine("Das Dokument ist " + numberOfPages + " Seiten lang.");
@@ -44,20 +51,20 @@ namespace IHKDocScanner
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der linke Rand muss 2,5cm betragen.");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Gray;
             } else
             {
-                Console.WriteLine("Der rechte Rand ist korrekt formatiert");
+                Console.WriteLine("Der rechte Rand ist korrekt formatiert.");
             }
 
             if (marginRight < 42 || marginRight > 43)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der linke Rand muss 1,5cm betragen.");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.ForegroundColor = ConsoleColor.Gray;
             } else
             {
-                Console.WriteLine("Der linke Rand ist korrekt formatiert");
+                Console.WriteLine("Der linke Rand ist korrekt formatiert.");
             }
         }
 
@@ -67,8 +74,8 @@ namespace IHKDocScanner
             TablesOfContents tbc = Document.TablesOfContents;
             if (tbc.Count < 1) {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Fehler: Kein Inhaltsverzeichnis vorhanden");
-                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("Fehler: Kein Inhaltsverzeichnis vorhanden.");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
         /*
@@ -116,7 +123,45 @@ namespace IHKDocScanner
                 }
         }
         */
-        
 
+            //Die Methode prüft, ob Fußzeilen existieren
+        public bool CheckFooter()
+        {
+            /*
+            Sections sections = Document.Sections;
+            HeadersFooters footers2 = Document.Sections.First.Footers; 
+            Section section = sections[1];
+          
+            HeadersFooters footers = section.Footers;
+            HeaderFooter footerEven = Footers[WdHeaderFooterIndex.wdHeaderFooterEvenPages];
+            HeaderFooter footerFirst = Footers[WdHeaderFooterIndex.wdHeaderFooterFirstPage];
+            HeaderFooter footerPrimary = Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
+*/
+
+
+            if (!FooterEven.Exists && !FooterFirst.Exists && !FooterPrimary.Exists)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Fehler: Keine Fußzeile vorhanden: ");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("Die Seitennummern sollen dynamisch in einer Fußzeile generiert werden.");
+                return false;
+            }
+            return true;
+        }
+        
+        public void CheckPageNumbers()
+        {
+            int pageNumbersEven = FooterEven.PageNumbers.Count;
+            int pageNumbersFirst = FooterFirst.PageNumbers.Count;
+            int pageNumbersPrimary = FooterPrimary.PageNumbers.Count;
+
+            if (!(pageNumbersEven > 0) && !(pageNumbersFirst > 0) || !(pageNumbersPrimary > 0))
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Fehler: Keine dynamischen Seitennummern in der Fußleiste vorhanden.");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+        }
     }
 }

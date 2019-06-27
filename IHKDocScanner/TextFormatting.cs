@@ -22,18 +22,10 @@ namespace IHKDocScanner
             Par = doc.Paragraphs;
         }
 
-        public void SetParagraphNumber(int parNumber)
+        public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
         {
             this.ParagraphNumber = parNumber;
-        }
-
-        public void SetParagraph(Paragraph paragraph)
-        {
             this.Paragraph = paragraph;
-        }
-
-        public void SetPageNumber(int pageNumber)
-        {
             this.PageNumber = pageNumber;
         }
 
@@ -45,7 +37,7 @@ namespace IHKDocScanner
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Fehler: Der Zeilenabstand von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " beträgt nicht 1,5");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }
         }
 
@@ -57,24 +49,51 @@ namespace IHKDocScanner
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("Fehler: Die Schriftart von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht Arial");
-                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Gray;
                     }
-            
         }
 
+        //Überprüft die Schriftgröße
         public void CheckFontSize()
         {
-            StyleCheck sc = new StyleCheck(Doc);
                 Range parRng = Paragraph.Range;
-                if (sc.CheckHead(Paragraph, PageNumber, ParagraphNumber))
-                return;
-                
                 if (parRng.Font.Size != 12)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Fehler: Die Schriftgröße von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht 12");
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.Gray;
                 }          
+        }
+
+        //Überprüft die Formatierung: Fett, unterstrichen, kursiv; Wenn dies vorkommt, wird eine Warnung ausgegeben.
+        public void CheckWordFormat()
+        {
+            bool bold = false;
+            bool italic = false;
+            bool underline = false;
+            Range rng = Paragraph.Range;
+            foreach (Range word in rng.Words)
+            {
+                if (word.Bold == -1)
+                {
+                    bold = true;                }
+                else if (word.Italic == -1)
+                {
+                    italic = true;
+                }
+                else if (((WdUnderline)word.Underline) == WdUnderline.wdUnderlineSingle)
+                {
+                    underline = true;
+                }
+            }
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            if (bold)
+                Console.WriteLine("Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung: Fett");
+            if (italic)
+                Console.WriteLine("Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung: Kursiv");
+            if (underline)
+                Console.WriteLine("Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung: Unterstrichen");
+            Console.ForegroundColor = ConsoleColor.Gray;
         }
     }
 }
