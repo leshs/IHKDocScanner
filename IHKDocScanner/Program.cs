@@ -93,17 +93,27 @@ namespace IHKDocScanner
                 tf.CheckWordFormat();
             }
 
+
             wordApp.Documents.Close();
             wordApp.Quit();
 
-            Console.WriteLine();
-            Console.WriteLine("Prüfung abgeschlossen");
+            int warnings = stC.GetWarnings() + glF.GetWarnings();
+            int errors = tf.GetErrors() + glF.GetErrors();
+            int notifications = tf.GetNotifications();
+
+            PrintSummary(warnings, errors, notifications, showHinweise);
             NextAction(inputArr);
         }
 
-        public static void PrintSummary(int warnungen, int fehler, int hinweise)
+        public static void PrintSummary(int warnungen, int fehler, int hinweise, bool showHinweise)
         {
-
+            Console.WriteLine();
+            Console.WriteLine("Prüfung abgeschlossen");
+            Console.WriteLine("Fehler: " + fehler);
+            Console.WriteLine("Warnungen: " + warnungen);
+            if(showHinweise)
+                Console.WriteLine("Hinweise: " + hinweise);
+            Console.WriteLine();
         }
 
         /* Methode zum bestimmen der nächsten Aktion - 3 Optionen:
