@@ -19,6 +19,8 @@ namespace IHKDocScanner
         static void RunProgram()
         {
             Console.WriteLine("Dateipfad des Dokuments angeben.");
+            Console.WriteLine("Mit dem Zusatz -H kann die Anzeige von Hinweisen ausgeschaltet werden.");
+
             bool showHinweise = true;
             String input = Console.ReadLine();
             String[] fileArr = input.Split(' ');
