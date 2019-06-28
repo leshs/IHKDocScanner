@@ -21,12 +21,11 @@ namespace IHKDocScanner
             Console.WriteLine("Dateipfad des Dokuments angeben.");
             String fileName = Console.ReadLine();
             Application wordApp = new Application();
-            String fileTest = "C:\\IHKDocTest\\ihk.docx";
             Document wordDoc = null;
             
             try
             {
-                wordDoc = wordApp.Documents.Open(fileTest);
+                wordDoc = wordApp.Documents.Open(fileName);
             }
             catch
             {
