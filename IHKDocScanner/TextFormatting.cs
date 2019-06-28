@@ -24,11 +24,15 @@ namespace IHKDocScanner
             Par = doc.Paragraphs;
         }
 
-        public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber, bool showHinweise)
+        public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
         {
             ParagraphNumber = parNumber;
             Paragraph = paragraph;
             PageNumber = pageNumber;
+        }
+
+        public void SetShowHinweise(bool showHinweise)
+        {
             ShowHinweise = showHinweise;
         }
 
@@ -42,7 +46,6 @@ namespace IHKDocScanner
                 Console.WriteLine("Fehler: Der Zeilenabstand von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " beträgt nicht 1,5");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-
         }
 
         //Schriftart überprüfen
@@ -106,6 +109,7 @@ namespace IHKDocScanner
                 if(ShowHinweise)
                     Console.WriteLine(message);
             }
+
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }

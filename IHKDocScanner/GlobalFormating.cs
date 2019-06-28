@@ -31,6 +31,7 @@ namespace IHKDocScanner
         public void checkPageCount()
         {
             int numberOfPages = Rng.get_Information(WdInformation.wdNumberOfPagesInDocument);
+
             if (numberOfPages > 15)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -48,6 +49,7 @@ namespace IHKDocScanner
         {
             float marginLeft = PSetup.LeftMargin;
             float marginRight = PSetup.RightMargin;
+
             if (marginLeft < 70 || marginLeft > 71)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -75,6 +77,7 @@ namespace IHKDocScanner
         public void checkTableOfContents()
         {
             TablesOfContents tbc = Document.TablesOfContents;
+
             if (tbc.Count < 1)
             {
                 Console.ForegroundColor = ConsoleColor.Red;

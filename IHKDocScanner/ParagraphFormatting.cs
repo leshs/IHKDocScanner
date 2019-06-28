@@ -23,9 +23,9 @@ namespace IHKDocScanner
 
         public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
         {
-            this.ParagraphNumber = parNumber;
-            this.Paragraph = paragraph;
-            this.PageNumber = pageNumber;
+            ParagraphNumber = parNumber;
+            Paragraph = paragraph;
+            PageNumber = pageNumber;
         }
 
         //Überprüft, ob es sich um eine Überschrift handelt. Wenn ja, werden die übrigen Formatierungs-Prüfungen ignoriert.
@@ -33,9 +33,9 @@ namespace IHKDocScanner
         public bool CheckHeading()
         {
             Style style = Paragraph.get_Style();
-
-            String styleName = style.NameLocal;
+            string styleName = style.NameLocal;
             String[] styleNameArr = styleName.Split(' ');
+
             if (styleName == "Standard")
             {
                 return false;
