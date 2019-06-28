@@ -28,7 +28,6 @@ namespace IHKDocScanner
                 if (fileArr[1] == "-H")
                     showHinweise = false;
             }
-            Console.WriteLine(fileArr[1]);
             Application wordApp = new Application();
             Document wordDoc = null;
 
