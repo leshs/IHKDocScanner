@@ -14,11 +14,17 @@ namespace IHKDocScanner
         private Paragraph Paragraph;
         private Range Rng;
         private PageSetup PSetup;
+        private int Warnings = 0;
 
         public ParagraphFormatting(Document document)
         {
             Rng = document.Range();
             PSetup = Rng.PageSetup;
+        }
+
+        public int GetWarnings()
+        {
+            return Warnings;
         }
 
         public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
@@ -63,6 +69,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Warnung: Die Absatzkontrolle bei Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist deaktiviert");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Warnings++;
             }
         }
     }

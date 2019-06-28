@@ -101,9 +101,18 @@ namespace IHKDocScanner
             NextAction(inputArr);
         }
 
-        public static void NextAction(string[] inputArr)
+        public static void PrintSummary(int warnungen, int fehler, int hinweise)
         {
 
+        }
+
+        /* Methode zum bestimmen der nächsten Aktion - 3 Optionen:
+         * Schließen der Konsole
+         * ReRun mit gleichem Dokument
+         * Rerun mit neuem Dokument
+         */
+        public static void NextAction(string[] inputArr)
+        {
             Console.WriteLine("Um das Dokument erneut zu prüfen 'j' drücken");
             Console.WriteLine("Um ein anderes Dokument zu prüfen 'n' drücken");
             Console.WriteLine("Um das Programm zu schließen Escape drücken");

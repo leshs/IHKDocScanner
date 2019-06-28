@@ -16,6 +16,8 @@ namespace IHKDocScanner
         private HeaderFooter FooterEven;
         private HeaderFooter FooterFirst;
         private HeaderFooter FooterPrimary;
+        private int Errors;
+        private int Warnings;
 
         public GlobalFormating(Document document)
         {
@@ -25,6 +27,16 @@ namespace IHKDocScanner
             FooterEven = Document.Sections.First.Footers[WdHeaderFooterIndex.wdHeaderFooterEvenPages];
             FooterFirst = Document.Sections.First.Footers[WdHeaderFooterIndex.wdHeaderFooterFirstPage];
             FooterPrimary = Document.Sections.First.Footers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
+        }
+
+        public int GetErrors()
+        {
+            return Errors;
+        }
+
+        public int GetWarnings()
+        {
+            return Warnings;
         }
 
         //Seitenanzahl überüfen
@@ -37,6 +49,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Das Dokument darf höchstens 15 Seiten lang sein. Die Seitenzahl beträgt " + numberOfPages + ".");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
             else
             {
@@ -55,6 +68,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der linke Rand muss 2,5cm betragen.");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
             else
             {
@@ -66,6 +80,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der linke Rand muss 1,5cm betragen.");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
             else
             {
@@ -83,6 +98,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Kein Inhaltsverzeichnis vorhanden.");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
         }
 
@@ -95,6 +111,7 @@ namespace IHKDocScanner
                 Console.WriteLine("Warnung: Die Fußzeilen auf geraden und ungeraden Seiten können sich unterscheiden.");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("In Textverarbeitungsprogrammen kann unter dem Menüpunkt Fußzeilen eingestellt werden, ob sich gerade und ungerade Seiten unterscheiden sollen");
+                Warnings++;
             }
         }
 
@@ -110,6 +127,7 @@ namespace IHKDocScanner
                 Console.WriteLine("Fehler: Fehlende dynamische Seitennummern in der Fußleiste.");
                 Console.ForegroundColor = ConsoleColor.Gray;
                 Console.WriteLine("In Textverarbeitungsprogrammen können dynamische Seitennummern unter dem Menüpunkt Einfügen eingestellt werden.");
+                Errors++;
             }
         }
     }

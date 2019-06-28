@@ -16,6 +16,8 @@ namespace IHKDocScanner
         private int PageNumber;
         private Paragraph Paragraph;
         private bool ShowHinweise;
+        private int Errors = 0;
+        private int Notifications = 0;
 
         public TextFormatting(Document doc)
         {
@@ -24,6 +26,15 @@ namespace IHKDocScanner
             Par = doc.Paragraphs;
         }
 
+        public int GetErrors()
+        {
+            return Errors;
+        }
+
+        public int GetNotifications()
+        {
+            return Notifications;
+        }
         public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
         {
             ParagraphNumber = parNumber;
@@ -45,6 +56,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der Zeilenabstand von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " beträgt nicht 1,5");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
         }
 
@@ -57,6 +69,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Die Schriftart von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht Arial");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
         }
 
@@ -69,6 +82,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Die Schriftgröße von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht 12");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Errors++;
             }
         }
 
@@ -107,7 +121,10 @@ namespace IHKDocScanner
             if (bold || italic || underline)
             {
                 if(ShowHinweise)
+                {
                     Console.WriteLine(message);
+                    Notifications++;
+                }
             }
 
             Console.ForegroundColor = ConsoleColor.Gray;
