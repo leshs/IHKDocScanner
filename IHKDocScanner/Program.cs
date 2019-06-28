@@ -105,14 +105,14 @@ namespace IHKDocScanner
             NextAction(inputArr);
         }
 
-        public static void PrintSummary(int warnungen, int fehler, int hinweise, bool showHinweise)
+        public static void PrintSummary(int warningCount, int errorCount, int notificationCount, bool showHinweise)
         {
             Console.WriteLine();
             Console.WriteLine("Prüfung abgeschlossen");
-            Console.WriteLine("Fehler: " + fehler);
-            Console.WriteLine("Warnungen: " + warnungen);
+            Console.WriteLine("Fehler: " + errorCount);
+            Console.WriteLine("Warnungen: " + warningCount);
             if(showHinweise)
-                Console.WriteLine("Hinweise: " + hinweise);
+                Console.WriteLine("Hinweise: " + notificationCount);
             Console.WriteLine();
         }
 
