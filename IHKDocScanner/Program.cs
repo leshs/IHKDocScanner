@@ -23,7 +23,7 @@ namespace IHKDocScanner
             Application wordApp = new Application();
             String fileTest = "C:\\IHKDocTest\\ihk.docx";
             Document wordDoc = null;
-
+            
             try
             {
                 wordDoc = wordApp.Documents.Open(fileTest);
@@ -48,9 +48,9 @@ namespace IHKDocScanner
             glF.checkMargin();
             glF.checkPageCount();
             glF.checkTableOfContents();
-            if (!glF.CheckFooter())
-                glF.CheckPageNumbers();
-
+            glF.CheckFooter();
+            glF.CheckPageNumbers();
+            
             Console.WriteLine();
 
             for (int par = 1; par < wordDoc.Paragraphs.Count; par++)

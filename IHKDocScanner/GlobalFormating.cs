@@ -76,88 +76,33 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Kein Inhaltsverzeichnis vorhanden.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-            }
+            }                       
         }
-        /*
-        public void checkPageNumbers(Document docs)
+
+        //Die Methode prüft, ob sich gerade und ungerade Fußzeilen unterscheiden.
+        public void CheckFooter()
         {
-            for (int i = 1; i <= docs.Sections.Count; i++)
+            if (!FooterEven.Exists)
             {
-
-                try
-                {
-                    Section section = docs.Sections[i];
-                    if (section != null)
-                    {
-                        headOrFooter = section.Footers[.WdHeaderFooterIndex.wdHeaderFooterPrimary];
-                        hasNumberPages = HeaderOrFooterHasPageNumber(headOrFooter);
-                        if (hasNumberPages)
-                            break;
-
-
-                        headOrFooter = section.Footers[Word.WdHeaderFooterIndex.wdHeaderFooterEvenPages];
-                        hasNumberPages = HeaderOrFooterHasPageNumber(headOrFooter);
-                        if (hasNumberPages)
-                            break;
-
-                        headOrFooter = section.Footers[Word.WdHeaderFooterIndex.wdHeaderFooterFirstPage];
-                        hasNumberPages = HeaderOrFooterHasPageNumber(headOrFooter);
-                        if (hasNumberPages)
-                            break;
-
-                        headOrFooter = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterPrimary];
-                        hasNumberPages = HeaderOrFooterHasPageNumber(headOrFooter);
-                        if (hasNumberPages)
-                            break;
-
-                        headOrFooter = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterEvenPages];
-                        hasNumberPages = HeaderOrFooterHasPageNumber(headOrFooter);
-                        if (hasNumberPages)
-                            break;
-
-                        headOrFooter = section.Headers[Word.WdHeaderFooterIndex.wdHeaderFooterFirstPage];
-                        hasNumberPages = HeaderOrFooterHasPageNumber(headOrFooter);
-                        if (hasNumberPages)
-                            break;
-                    }
-                }
-        }
-        */
-
-        //Die Methode prüft, ob Fußzeilen existieren. Die erste Seite wird dabei ignoriert.
-        public bool CheckFooter()
-        {
-            /*
-            Unterscheidung nach Footer-Art
-            */
-
-
-            if (!FooterEven.Exists && !FooterFirst.Exists && !FooterPrimary.Exists)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Fehler: Keine Fußzeile vorhanden: ");
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Warnung: Die Fußzeilen auf geraden und ungeraden Seiten können sich unterscheiden.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("Die Seitennummern sollen dynamisch in einer Fußzeile generiert werden.");
-                return false;
+                Console.WriteLine("\t In Textverarbeitungsprogrammen kann unter dem Menüpunkt Fußzeilen eingestellt werden, ob sich gerade und ungerade Seiten unterscheiden sollen");
             }
-            return true;
         }
-        
+
         //Überprüft, ob dynamische Seitennummern vorhanden sind
         public void CheckPageNumbers()
         {
-            /*
-             * Differenzierung zwischen unterschiedlichen Footern einfügen
-             */
             int pageNumbersEven = FooterEven.PageNumbers.Count;
-            int pageNumbersFirst = FooterFirst.PageNumbers.Count;
             int pageNumbersPrimary = FooterPrimary.PageNumbers.Count;
 
-            if (!(pageNumbersEven > 0) && !(pageNumbersFirst > 0) || !(pageNumbersPrimary > 0))
+            if (!(pageNumbersEven > 0) && !(pageNumbersPrimary > 0))
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.Write("Fehler: Keine dynamischen Seitennummern in der Fußleiste vorhanden.");
+                Console.WriteLine("Fehler: Fehlende dynamische Seitennummern in der Fußleiste.");
                 Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("In Textverarbeitungsprogrammen können dynamische Seitennummern unter dem Menüpunkt Einfügen eingestellt werden.");
             }
         }
     }

@@ -39,6 +39,7 @@ namespace IHKDocScanner
                     Console.WriteLine("Fehler: Der Zeilenabstand von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " beträgt nicht 1,5");
                     Console.ForegroundColor = ConsoleColor.Gray;
                 }
+                
         }
 
         //Schriftart überprüfen
@@ -87,14 +88,14 @@ namespace IHKDocScanner
                 }
             }
             Console.ForegroundColor = ConsoleColor.Yellow;
-            String message = "Warnung: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung:"
+            String message = "Hinweis: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung:";
             if (bold)
-                String message = message + " fett";
+                message = message + " fett";
             if (italic)
                 message = message + " kursiv";
             if (underline)
-                message = message + unterstrichen;
-            if(bold || italic || underrline)
+                message = message + " unterstrichen";
+            if(bold || italic || underline)
                 Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.Gray;
         }
