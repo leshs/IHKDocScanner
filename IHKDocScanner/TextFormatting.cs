@@ -15,6 +15,7 @@ namespace IHKDocScanner
         private int ParagraphNumber;
         private int PageNumber;
         private Paragraph Paragraph;
+        private bool ShowHinweise;
 
         public TextFormatting(Document doc)
         {
@@ -23,11 +24,12 @@ namespace IHKDocScanner
             Par = doc.Paragraphs;
         }
 
-        public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
+        public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber, bool showHinweise)
         {
             ParagraphNumber = parNumber;
             Paragraph = paragraph;
             PageNumber = pageNumber;
+            ShowHinweise = showHinweise;
         }
 
         //Überprüft den Zeilenabstand
@@ -100,7 +102,10 @@ namespace IHKDocScanner
             if (underline)
                 message = message + " unterstrichen";
             if (bold || italic || underline)
-                Console.WriteLine(message);
+            {
+                if(ShowHinweise)
+                    Console.WriteLine(message);
+            }
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }

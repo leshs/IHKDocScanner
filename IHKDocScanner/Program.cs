@@ -19,7 +19,16 @@ namespace IHKDocScanner
         static void RunProgram()
         {
             Console.WriteLine("Dateipfad des Dokuments angeben.");
-            String fileName = Console.ReadLine();
+            bool showHinweise = true;
+            String input = Console.ReadLine();
+            String[] fileArr = input.Split(' ');
+            String fileName = fileArr[0];
+            if(fileArr.Length > 1)
+            {
+                if (fileArr[1] == "-H")
+                    showHinweise = false;
+            }
+            Console.WriteLine(fileArr[1]);
             Application wordApp = new Application();
             Document wordDoc = null;
 
@@ -55,7 +64,7 @@ namespace IHKDocScanner
                 Paragraph paragraph = wordDoc.Paragraphs[par];
                 int pageNumber = paragraph.Range.Information[WdInformation.wdActiveEndAdjustedPageNumber];
 
-                tf.SetClassAttributes(par, paragraph, pageNumber);
+                tf.SetClassAttributes(par, paragraph, pageNumber, showHinweise);
                 stC.SetClassAttributes(par, paragraph, pageNumber);
 
                 if (stC.CheckHeading())
