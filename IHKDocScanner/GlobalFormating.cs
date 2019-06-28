@@ -87,7 +87,7 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Warnung: Die Fußzeilen auf geraden und ungeraden Seiten können sich unterscheiden.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-                Console.WriteLine("\t In Textverarbeitungsprogrammen kann unter dem Menüpunkt Fußzeilen eingestellt werden, ob sich gerade und ungerade Seiten unterscheiden sollen");
+                Console.WriteLine("In Textverarbeitungsprogrammen kann unter dem Menüpunkt Fußzeilen eingestellt werden, ob sich gerade und ungerade Seiten unterscheiden sollen");
             }
         }
 

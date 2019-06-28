@@ -35,16 +35,13 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Gray;
                 RunProgram();
             }
-            //---------------------------------------------------------
 
-            
-            //-----------------------------------------
             TextFormatting tf = new TextFormatting(wordDoc);
             GlobalFormating glF = new GlobalFormating(wordDoc);
             ParagraphFormatting stC = new ParagraphFormatting(wordDoc);
 
             Console.WriteLine();
-            Console.WriteLine("globale Einstellungen");
+            Console.WriteLine("Globale Einstellungen");
             glF.checkMargin();
             glF.checkPageCount();
             glF.checkTableOfContents();
@@ -53,6 +50,7 @@ namespace IHKDocScanner
             
             Console.WriteLine();
 
+            //Es wird durch jeden Absatz des Dokuments iteriert und die Formatierungen überprüft.
             for (int par = 1; par < wordDoc.Paragraphs.Count; par++)
             {
                 Paragraph paragraph = wordDoc.Paragraphs[par];
@@ -73,86 +71,6 @@ namespace IHKDocScanner
             wordApp.Documents.Close();
             wordApp.Quit();
             Console.ReadLine();
-        }
-
-
-        public static void checkHeader(Document wordDoc, Range rng)
-
-        {
-            //WdPageNumberStyle.wd
-            int countSec = wordDoc.Sections.Count;
-            Console.WriteLine("Sections: "+countSec);
-            List<String> testHeader = new List<String>();
-            foreach(Section asection in wordDoc.Sections)
-            {
-                foreach(HeaderFooter aHeader in asection.Footers)
-                {
-                    testHeader.Add(aHeader.Range.Text);
-                    if (aHeader.PageNumbers == null)
-                        Console.WriteLine("es existieren nummern!!!!!!!!!!!!!!!!!!!!!");
-                }
-            }
-            foreach(String head in testHeader)
-            {
-                Console.WriteLine("footerListe " + head);
-            }
-            for(int i = 1; i <= wordDoc.Sections.Count; i++)
-            {
-                Section section = rng.Sections[i];
-                if(section != null)
-                {
-                    HeaderFooter headOrFoot = section.Headers[WdHeaderFooterIndex.wdHeaderFooterFirstPage];
-                    if(headOrFoot.PageNumbers.Count>0)
-                    {
-                        Console.WriteLine("FirstPage: Nummern vorhanden");
-                        Console.WriteLine("inhalt: " + headOrFoot.Range.Text);
-                    }
-                    else
-                    {
-                        Console.WriteLine("FirstPage: keine Nummern vorhanden");
-                        Console.WriteLine("inhalt: " + headOrFoot.Range.Text);
-                    }
-
-                    headOrFoot = section.Headers[WdHeaderFooterIndex.wdHeaderFooterEvenPages];
-
-                    if (headOrFoot.PageNumbers.Count > 0)
-                    {
-                        Console.WriteLine("EvenPages: Nummern vorhanden");
-                        Console.WriteLine("inhalt: " + headOrFoot.Range.Text);
-                    }
-                    else
-                    {
-                        Console.WriteLine("EvenPages: keine Nummern vorhanden");
-                        Console.WriteLine("inhalt: " + headOrFoot.Range.Text);
-                    }
-
-                     headOrFoot = section.Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary];
-                    if (headOrFoot.PageNumbers.Count > 0)
-                    {
-                        Console.WriteLine("PrimaryPages: Nummern vorhanden");
-                        Console.WriteLine("inhalt: " + headOrFoot.Range.Text);
-                    }
-                    else
-                    {
-                        Console.WriteLine("PrimaryPages = keine Nummern vorhanden");
-                        Console.WriteLine("inhalt: " + headOrFoot.Range.Text);
-                    }
-                }
-            }
-
-            if (wordDoc.Sections[1].Headers[WdHeaderFooterIndex.wdHeaderFooterPrimary].IsHeader) 
-
-            {
-                Console.WriteLine("er sagt ist header or footer");
-            }
-            Sections sections = wordDoc.Sections;
-            List<HeadersFooters> test = new List<HeadersFooters>();
-
-            if (test == null)
-            {
-                Console.WriteLine("kein Header");
-            }
-            Console.WriteLine("Header vorhanden?!");
         }
     }
 }
