@@ -22,7 +22,7 @@ namespace IHKDocScanner
             String fileName = Console.ReadLine();
             Application wordApp = new Application();
             Document wordDoc = null;
-            
+
             try
             {
                 wordDoc = wordApp.Documents.Open(fileName);
@@ -46,7 +46,7 @@ namespace IHKDocScanner
             glF.checkTableOfContents();
             glF.CheckFooter();
             glF.CheckPageNumbers();
-            
+
             Console.WriteLine();
 
             //Es wird durch jeden Absatz des Dokuments iteriert und die Formatierungen überprüft.

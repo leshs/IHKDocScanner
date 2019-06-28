@@ -33,21 +33,24 @@ namespace IHKDocScanner
         public bool CheckHeading()
         {
             Style style = Paragraph.get_Style();
-            
+
             String styleName = style.NameLocal;
             String[] styleNameArr = styleName.Split(' ');
-            if(styleName == "Standard")
+            if (styleName == "Standard")
             {
                 return false;
-            } else if(styleNameArr[0] == "Verzeichnis" || styleNameArr[0] == "Inhaltsverzeichnisüberschrift")
+            }
+            else if (styleNameArr[0] == "Verzeichnis" || styleNameArr[0] == "Inhaltsverzeichnisüberschrift")
             {
                 Console.WriteLine("Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist eine Überschrift im Inhaltsverzeichnis. Style: " + styleName);
                 return true;
-            } else if(styleNameArr[0] == "Überschrift")
+            }
+            else if (styleNameArr[0] == "Überschrift")
             {
-                Console.WriteLine("Absatz " + ParagraphNumber + " auf Seite "+ PageNumber + " ist eine Überschrift. Style: " + styleName);
+                Console.WriteLine("Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist eine Überschrift. Style: " + styleName);
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }

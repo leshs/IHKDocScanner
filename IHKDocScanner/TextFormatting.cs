@@ -33,38 +33,38 @@ namespace IHKDocScanner
         //Überprüft den Zeilenabstand
         public void CheckLineSpacing()
         {
-                float lineSpace = Paragraph.LineSpacing;
-                if(lineSpace != 18)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Fehler: Der Zeilenabstand von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " beträgt nicht 1,5");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }
-                
+            float lineSpace = Paragraph.LineSpacing;
+            if (lineSpace != 18)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Fehler: Der Zeilenabstand von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " beträgt nicht 1,5");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+
         }
 
         //Schriftart überprüfen
         public void CheckFont()
         {
-                Range parRng = Paragraph.Range;
-                    if (parRng.Font.Name != "Arial")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine("Fehler: Die Schriftart von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht Arial");
-                        Console.ForegroundColor = ConsoleColor.Gray;
-                    }
+            Range parRng = Paragraph.Range;
+            if (parRng.Font.Name != "Arial")
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Fehler: Die Schriftart von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht Arial");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
         }
 
         //Überprüft die Schriftgröße
         public void CheckFontSize()
         {
-                Range parRng = Paragraph.Range;
-                if (parRng.Font.Size != 12)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("Fehler: Die Schriftgröße von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht 12");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                }          
+            Range parRng = Paragraph.Range;
+            if (parRng.Font.Size != 12)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Fehler: Die Schriftgröße von Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " ist nicht 12");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
         }
 
         //Überprüft die Formatierung: Fett, unterstrichen, kursiv; Wenn dies vorkommt, wird eine Warnung ausgegeben.
@@ -79,7 +79,8 @@ namespace IHKDocScanner
             {
                 if (word.Bold == -1)
                 {
-                    bold = true;                }
+                    bold = true;
+                }
                 else if (word.Italic == -1)
                 {
                     italic = true;
@@ -98,7 +99,7 @@ namespace IHKDocScanner
                 message = message + " kursiv";
             if (underline)
                 message = message + " unterstrichen";
-            if(bold || italic || underline)
+            if (bold || italic || underline)
                 Console.WriteLine(message);
             Console.ForegroundColor = ConsoleColor.Gray;
         }

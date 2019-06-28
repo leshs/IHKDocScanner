@@ -16,7 +16,7 @@ namespace IHKDocScanner
         private HeaderFooter FooterEven;
         private HeaderFooter FooterFirst;
         private HeaderFooter FooterPrimary;
-       
+
         public GlobalFormating(Document document)
         {
             Rng = document.Range();
@@ -34,9 +34,10 @@ namespace IHKDocScanner
             if (numberOfPages > 15)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Fehler: Das Dokument darf höchstens 15 Seiten lang sein. Die Seitenzahl beträgt " + numberOfPages +".");
+                Console.WriteLine("Fehler: Das Dokument darf höchstens 15 Seiten lang sein. Die Seitenzahl beträgt " + numberOfPages + ".");
                 Console.ForegroundColor = ConsoleColor.Gray;
-            } else
+            }
+            else
             {
                 Console.WriteLine("Das Dokument ist " + numberOfPages + " Seiten lang.");
             }
@@ -52,7 +53,8 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der linke Rand muss 2,5cm betragen.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-            } else
+            }
+            else
             {
                 Console.WriteLine("Der rechte Rand ist korrekt formatiert.");
             }
@@ -62,7 +64,8 @@ namespace IHKDocScanner
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Der linke Rand muss 1,5cm betragen.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-            } else
+            }
+            else
             {
                 Console.WriteLine("Der linke Rand ist korrekt formatiert.");
             }
@@ -72,11 +75,12 @@ namespace IHKDocScanner
         public void checkTableOfContents()
         {
             TablesOfContents tbc = Document.TablesOfContents;
-            if (tbc.Count < 1) {
+            if (tbc.Count < 1)
+            {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Fehler: Kein Inhaltsverzeichnis vorhanden.");
                 Console.ForegroundColor = ConsoleColor.Gray;
-            }                       
+            }
         }
 
         //Die Methode prüft, ob sich gerade und ungerade Fußzeilen unterscheiden.
