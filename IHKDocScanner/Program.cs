@@ -14,8 +14,8 @@ namespace IHKDocScanner
             Console.WriteLine("Es wird nur Word mit der Benutzersprache Deutsch unterstützt.");
             Console.WriteLine("Die Absatzangaben beziehen sich auf das gesamte Dokument.");
             RunProgram();
-
         }
+
         static void RunProgram()
         {
             Console.WriteLine("Dateipfad des Dokuments angeben.");

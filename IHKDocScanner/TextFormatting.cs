@@ -15,6 +15,7 @@ namespace IHKDocScanner
         private int ParagraphNumber;
         private int PageNumber;
         private Paragraph Paragraph;
+
         public TextFormatting(Document doc)
         {
             Doc = doc;
@@ -24,9 +25,9 @@ namespace IHKDocScanner
 
         public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
         {
-            this.ParagraphNumber = parNumber;
-            this.Paragraph = paragraph;
-            this.PageNumber = pageNumber;
+            ParagraphNumber = parNumber;
+            Paragraph = paragraph;
+            PageNumber = pageNumber;
         }
 
         //Überprüft den Zeilenabstand
@@ -73,6 +74,7 @@ namespace IHKDocScanner
             bool italic = false;
             bool underline = false;
             Range rng = Paragraph.Range;
+
             foreach (Range word in rng.Words)
             {
                 if (word.Bold == -1)
@@ -87,6 +89,7 @@ namespace IHKDocScanner
                     underline = true;
                 }
             }
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             String message = "Hinweis: In Absatz " + ParagraphNumber + " auf Seite " + PageNumber + " befinden sich Wörter mit der Formatierung:";
             if (bold)

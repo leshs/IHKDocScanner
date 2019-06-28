@@ -14,11 +14,13 @@ namespace IHKDocScanner
         private Paragraph Paragraph;
         private Range Rng;
         private PageSetup PSetup;
+
         public ParagraphFormatting(Document document)
         {
             Rng = document.Range();
             PSetup = Rng.PageSetup;
         }
+
         public void SetClassAttributes(int parNumber, Paragraph paragraph, int pageNumber)
         {
             this.ParagraphNumber = parNumber;
@@ -50,7 +52,6 @@ namespace IHKDocScanner
                 return false;
             }
         }
-
 
         public void CheckWidow()
         {
