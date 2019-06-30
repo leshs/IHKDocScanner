@@ -13,31 +13,45 @@ namespace IHKDocScanner
             Console.WriteLine("Das Programm überprüft das Dokument auf korrekte Formatierungen bzgl. Rändern, Inhaltsverzeichnis, Schriftgröße, -Art und -Format und Überschriften.");
             Console.WriteLine("Es wird nur Word mit der Benutzersprache Deutsch unterstützt.");
             Console.WriteLine("Die Absatzangaben beziehen sich auf das gesamte Dokument.");
-            string[] oldInput = null;
-            RunProgram(oldInput);
+            String fileNameOld = null;
+            RunProgram(fileNameOld);
         }
 
-        public static void RunProgram(string[] oldInput)
+        public static void RunProgram(string fileNameOld)
         {
-
+            //Der input muss zu einem CHar[] gemacht werden und die letzten beiden Chars geprüft werden, ob sie "-H" sind. Wenn ja, ist der Dateiname Char[] - 3; ansonsten das gesamte char[];
             Application wordApp = new Application();
             Document wordDoc = null;
+            string fileName;
             bool showHinweise = true;
-            string[] inputArr = null;
-            if(oldInput == null)
+
+            while (true)
+            {
+                Console.WriteLine("Hinweise anzeigen j/n?");
+                ConsoleKey ck = Console.ReadKey().Key;
+                Console.WriteLine();
+                if (ck == ConsoleKey.J)
+                {
+                    break;
+                }
+                else if (ck == ConsoleKey.N)
+                {
+                    showHinweise = false;
+                    break;
+                }
+            }
+
+            if (fileNameOld == null)
             {
                 Console.WriteLine("Dateipfad des Dokuments angeben.");
-                Console.WriteLine("Mit dem Zusatz -H kann die Anzeige von Hinweisen ausgeschaltet werden.");
-                string input = Console.ReadLine();
-                inputArr = input.Split(' ');
+                fileName = Console.ReadLine();
             }
             else
             {
-                inputArr = oldInput;
+                Console.WriteLine(fileNameOld);
+                fileName = fileNameOld;
             }
-            
-            string fileName = inputArr[0];
-
+          
             try
             {
                 wordDoc = wordApp.Documents.Open(fileName);
@@ -54,12 +68,6 @@ namespace IHKDocScanner
             GlobalFormating glF = new GlobalFormating(wordDoc);
             ParagraphFormatting stC = new ParagraphFormatting(wordDoc);
 
-            //Überprüfen, ob Hinweise angezeigt werden sollen
-            if (inputArr.Length > 1)
-            {
-                if (inputArr[1] == "-H")
-                    showHinweise = false;
-            }
             tf.SetShowHinweise(showHinweise);
 
             Console.WriteLine();
@@ -102,9 +110,10 @@ namespace IHKDocScanner
             int notifications = tf.GetNotifications();
 
             PrintSummary(warnings, errors, notifications, showHinweise);
-            NextAction(inputArr);
+            NextAction(fileName);
         }
 
+        //Ausgeben der Zusammenfassung der Fehlermeldungen (Fehler, Warnung, Hinweis)
         public static void PrintSummary(int warningCount, int errorCount, int notificationCount, bool showHinweise)
         {
             Console.WriteLine();
@@ -116,25 +125,20 @@ namespace IHKDocScanner
             Console.WriteLine();
         }
 
-        /* Methode zum bestimmen der nächsten Aktion - 3 Optionen:
-         * Schließen der Konsole
-         * ReRun mit gleichem Dokument
-         * Rerun mit neuem Dokument
-         */
-        public static void NextAction(string[] inputArr)
+        public static void NextAction(string fileName)
         {
             Console.WriteLine("Um das Dokument erneut zu prüfen 'j' drücken");
             Console.WriteLine("Um ein anderes Dokument zu prüfen 'n' drücken");
             Console.WriteLine("Um das Programm zu schließen Escape drücken");
 
             ConsoleKey nextActionKey = Console.ReadKey().Key;
+            Console.WriteLine();
 
             if(nextActionKey == ConsoleKey.J)
             {
-                RunProgram(inputArr);
+                RunProgram(fileName);
             } else if (nextActionKey == ConsoleKey.N)
             {
-                Console.WriteLine();
                 RunProgram(null);
             } else if (nextActionKey == ConsoleKey.Escape)
             {
@@ -143,7 +147,7 @@ namespace IHKDocScanner
             {
                 Console.WriteLine("Eingabe nicht erkannt");
                 Console.WriteLine();
-                NextAction(inputArr);
+                NextAction(fileName);
             }
         }
     }
