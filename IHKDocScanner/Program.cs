@@ -67,7 +67,6 @@ namespace IHKDocScanner
             TextFormatting tf = new TextFormatting(wordDoc);
             GlobalFormating glF = new GlobalFormating(wordDoc);
             ParagraphFormatting stC = new ParagraphFormatting(wordDoc);
-
             tf.SetShowHinweise(showHinweise);
 
             Console.WriteLine();
@@ -101,14 +100,13 @@ namespace IHKDocScanner
                 tf.CheckWordFormat();
             }
 
-
             wordApp.Documents.Close();
             wordApp.Quit();
 
             int warnings = stC.GetWarnings() + glF.GetWarnings();
             int errors = tf.GetErrors() + glF.GetErrors();
             int notifications = tf.GetNotifications();
-
+            
             PrintSummary(warnings, errors, notifications, showHinweise);
             NextAction(fileName);
         }
