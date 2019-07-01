@@ -45,6 +45,14 @@ namespace IHKDocScanner
             {
                 Console.WriteLine("Dateipfad des Dokuments angeben.");
                 fileName = Console.ReadLine();
+                
+                if(fileName.Length == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("Keine Datei angegeben");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    RunProgram(null);
+                }
             }
             else
             {
